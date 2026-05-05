@@ -40,13 +40,28 @@ export default function TodoList() {
         <nav>
           <ul className="nav-links">
             <li>
-              <button onClick={filterAll}>All Todos </button>
+              <button
+                className={filter === "all" ? "active" : ""}
+                onClick={filterAll}
+              >
+                All Todos{" "}
+              </button>
             </li>
             <li>
-              <button onClick={filterCompleted}>Completed Todos</button>
+              <button
+                className={filter === "completed" ? "active" : ""}
+                onClick={filterCompleted}
+              >
+                Completed Todos
+              </button>
             </li>
             <li>
-              <button onClick={filterUncompleted}>Uncompleted Todos</button>
+              <button
+                className={filter === "uncompleted" ? "active" : ""}
+                onClick={filterUncompleted}
+              >
+                Uncompleted Todos
+              </button>
             </li>
           </ul>
         </nav>
