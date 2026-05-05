@@ -8,6 +8,7 @@ import Posts from "./Posts";
 import PostDetails from "./PostDetails";
 import NotFound from "./NotFound";
 import PostsLayout from "./PostsLayout";
+import TailwindReadyComponents from "./TailwindReadyComponents";
 
 let postsData = [
   {
@@ -44,8 +45,8 @@ function App() {
               </Link>
             </li>
             <li>
-              <Link to="/contact" className="text-blue-500 hover:underline">
-                Contact
+              <Link to="/ready" className="text-blue-500 hover:underline">
+                Ready
               </Link>
             </li>
           </ul>
@@ -84,10 +85,12 @@ function App() {
               <Route path=":id" element={<PostDetails />} />
             </Route>
 
-            <Route path="/contact" element={<ContactPage />} />
+            <Route path="/ready" element={<TailwindReadyComponents />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </div>
+        <hr />
+        {/* <TailwindReadyComponents /> */}
       </>
     </PostsContext.Provider>
   );

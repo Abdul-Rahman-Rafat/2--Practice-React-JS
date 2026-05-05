@@ -1,0 +1,38 @@
+.todo-item {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  border-bottom: 1px solid #ccc;
+  gap: 10px; /* بدل space-evenly */
+}
+
+.actions {
+  display: flex;
+  gap: 10px;
+  flex-shrink: 0; /* مهم: يخلي الأزرار ما تتضغطش */
+}
+
+.TodoTitle {
+  flex: 1; /* ياخد باقي المساحة */
+  word-break: break-word; /* يكسر الكلام الطويل */
+  overflow-wrap: anywhere; /* مهم للكلام الطويل جدًا */
+}
+
+.actions button {
+  width: 50px;
+  height: 50px;
+  /* padding: 10px; */
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: large;
+}
+.actions button:hover {
+  background-color: #4caf50;
+  color: white;
+}
+.completed {
+  /* text-decoration: line-through; */
+  color: white;
+  background-color: #4caf50;
+}

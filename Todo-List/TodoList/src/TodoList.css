@@ -1,0 +1,44 @@
+.add-todo-form {
+  display: flex;
+  /* flex-direction: column; */
+  align-items: center;
+  gap: 10px;
+  justify-content: center;
+  margin-top: 50px;
+}
+input {
+  padding: 10px;
+  width: 50%;
+  box-sizing: border-box;
+  border-radius: 8px;
+}
+.add-btn {
+  padding: 10px 20px;
+  /* margin-top: 20px; */
+  border: none;
+  border-radius: 8px;
+  background-color: #4caf50;
+  color: white;
+  cursor: pointer;
+}
+.add-btn:hover {
+  background-color: #45a049;
+}
+.nav-links {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  margin-top: 20px;
+  list-style: none;
+}
+.nav-links a {
+  text-decoration: none;
+  color: #333;
+  font-weight: bold;
+}
+.nav-links a:hover {
+  color: #4caf50;
+}
+.nav-links .active {
+  color: #4caf50;
+}
