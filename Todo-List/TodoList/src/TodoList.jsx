@@ -1,6 +1,5 @@
-import { useState } from "react";
+import { useState, useContext, useEffect } from "react";
 import { TodoListContext } from "../contexts/TodoListContext";
-import { useContext } from "react";
 
 import TodoComponent from "./TodoComponent";
 import "./TodoList.css";
@@ -8,6 +7,17 @@ export default function TodoList() {
   const { todos, setTodos } = useContext(TodoListContext);
   const [todoItem, setTodoItem] = useState("");
   const [filter, setFilter] = useState("all");
+  useEffect(() => {
+    console.log("todos returned from localStorage:", todos);
+    setTodos(JSON.parse(localStorage.getItem("todos")) || []);
+  }, []); // This effect runs whenever the 'todos' state changes so it depends on the  'todo add , edit , delete , complete' state.
+  // //It will run after the component renders and the 'todos' state has been updated.
+
+  // if we make the dependency array empty [] the effect will run only once when the component mounts and it will not run again when the 'todos' state changes.
+  //useEffect(() => {
+  //   console.log("todos updated:", todos);
+  // }, []);
+
   function addTodo() {
     const newId = todos.length > 0 ? todos[todos.length - 1].id + 1 : 1;
     // if (todoItem.trim() === "") return;
@@ -16,7 +26,9 @@ export default function TodoList() {
       text: todoItem,
       completed: false,
     };
-    setTodos([...todos, newTodo]);
+    const updatedTodos = [...todos, newTodo];
+    setTodos(updatedTodos);
+    localStorage.setItem("todos", JSON.stringify(updatedTodos));
     setTodoItem("");
   }
   function filterAll() {

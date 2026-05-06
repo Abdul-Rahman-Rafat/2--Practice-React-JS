@@ -13,6 +13,7 @@ export default function TodoComponent({ todo }) {
       return todo;
     });
     setTodos(updatedTodos);
+    localStorage.setItem("todos", JSON.stringify(updatedTodos));
   }
   function onEdit(id) {
     // console.log("edit", id);
@@ -26,11 +27,13 @@ export default function TodoComponent({ todo }) {
         return todo;
       });
       setTodos(updatedTodos);
+      localStorage.setItem("todos", JSON.stringify(updatedTodos));
     }
   }
   function onDelete(id) {
     const updatedTodos = todos.filter((todo) => todo.id !== id);
     setTodos(updatedTodos);
+    localStorage.setItem("todos", JSON.stringify(updatedTodos));
   }
 
   return (
