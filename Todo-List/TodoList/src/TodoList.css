@@ -1,3 +1,12 @@
+.headerName {
+  font-family: Alex;
+  font-weight: 600;
+  /* font-size: 2.5rem; */
+  /* margin-bottom: 20px; */
+  margin: 30px;
+  padding: 50px;
+  border-bottom: #333 solid 2px;
+}
 .add-todo-form {
   display: flex;
   /* flex-direction: column; */

@@ -36,7 +36,8 @@ export default function TodoList() {
   return (
     <>
       <div className="todo-list">
-        <h1>my todo list</h1>
+        <h1 className="headerName"> مهامي</h1>
+
         <nav>
           <ul className="nav-links">
             <li>

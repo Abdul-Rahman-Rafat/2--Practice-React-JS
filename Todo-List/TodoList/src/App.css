@@ -1,0 +1,20 @@
+@font-face {
+  font-family: Alex;
+  src: url("../public/fonts/Alexandria-ExtraBold.ttf");
+  font-weight: 900;
+}
+@font-face {
+  font-family: Alex;
+  src: url("../public/fonts/Alexandria-Bold.ttf");
+  font-weight: 800;
+}
+@font-face {
+  font-family: Alex;
+  src: url("../public/fonts/Alexandria-SemiBold.ttf");
+  font-weight: 700;
+}
+@font-face {
+  font-family: Alex;
+  src: url("../public/fonts/Alexandria-Medium.ttf");
+  font-weight: 600;
+}
