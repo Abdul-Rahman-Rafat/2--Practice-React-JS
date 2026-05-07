@@ -2,9 +2,26 @@
   display: flex;
   align-items: center;
   /* justify-content: space-evenly; */
-  padding: 10px;
-  border-bottom: 1px solid #ccc;
-  gap: 10px; /* بدل space-evenly */
+  padding: 30px;
+  border: white solid 1px;
+
+  border-radius: 8px;
+  width: 80%;
+  margin: 10px auto;
+  /* border-bottom: 1px solid #ccc; */
+  gap: 5px; /* بدل space-evenly */
+  transition: all 0.3s ease-in-out; /* لإضافة تأثير عند التغيير */
+}
+.TodoTitle.completedTask {
+  /* background-color: #4caf50; */
+  color: white;
+  text-decoration: line-through;
+}
+
+.todo-item:hover {
+  background-color: #f9f9f9; /* تأثير عند المرور */
+  transform: translateY(-5px); /* رفع العنصر قليلاً عند المرور */
+  border: #123 solid 1px;
 }
 
 .actions {

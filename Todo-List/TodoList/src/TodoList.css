@@ -7,6 +7,15 @@
   padding: 50px;
   border-bottom: #333 solid 2px;
 }
+.todo-list {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  margin-top: 20px;
+  height: 400px;
+  overflow-y: scroll;
+}
 .add-todo-form {
   display: flex;
   /* flex-direction: column; */
@@ -26,12 +35,18 @@ input {
   /* margin-top: 20px; */
   border: none;
   border-radius: 8px;
-  background-color: #4caf50;
-  color: white;
+  background-color: #858383;
+  color: #123;
   cursor: pointer;
 }
-.add-btn:hover {
+
+.active_add-btn {
   background-color: #45a049;
+  color: white;
+}
+
+.add-btn.active_add-btn:hover {
+  background-color: #44b44a;
 }
 .nav-links {
   display: flex;

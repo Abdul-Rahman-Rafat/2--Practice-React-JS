@@ -26,8 +26,14 @@ export default function TodoComponent({ todo }) {
         }
         return todo;
       });
-      setTodos(updatedTodos);
-      localStorage.setItem("todos", JSON.stringify(updatedTodos));
+
+      if (newText.trim() === "") {
+        console.log("Updated todo text cannot be empty.");
+        return;
+      } else {
+        setTodos(updatedTodos);
+        localStorage.setItem("todos", JSON.stringify(updatedTodos));
+      }
     }
   }
   function onDelete(id) {
@@ -49,7 +55,11 @@ export default function TodoComponent({ todo }) {
 
         <button onClick={() => onDelete(todo.id)}>❌</button>
       </div>
-      <span className="TodoTitle">{todo.text}</span>
+      <span
+        className={`TodoTitle ${todo.completed === true ? "completedTask" : ""}`}
+      >
+        {todo.text}
+      </span>
     </div>
   );
 }

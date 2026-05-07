@@ -9,6 +9,7 @@ export default function TodoList() {
   const [filter, setFilter] = useState("all");
   useEffect(() => {
     console.log("todos returned from localStorage:", todos);
+
     setTodos(JSON.parse(localStorage.getItem("todos")) || []);
   }, []); // This effect runs whenever the 'todos' state changes so it depends on the  'todo add , edit , delete , complete' state.
   // //It will run after the component renders and the 'todos' state has been updated.
@@ -20,7 +21,10 @@ export default function TodoList() {
 
   function addTodo() {
     const newId = todos.length > 0 ? todos[todos.length - 1].id + 1 : 1;
-    // if (todoItem.trim() === "") return;
+    if (todoItem.trim() === "") {
+      console.log("Todo text cannot be empty.");
+      return;
+    }
     const newTodo = {
       id: newId,
       text: todoItem,
@@ -47,7 +51,7 @@ export default function TodoList() {
   });
   return (
     <>
-      <div className="todo-list">
+      <div>
         <h1 className="headerName"> مهامي</h1>
 
         <nav>
@@ -78,9 +82,11 @@ export default function TodoList() {
             </li>
           </ul>
         </nav>
-        {filteredTodos.map((todo) => (
-          <TodoComponent key={todo.id} todo={todo} />
-        ))}
+        <div className="todo-list">
+          {filteredTodos.map((todo) => (
+            <TodoComponent key={todo.id} todo={todo} />
+          ))}
+        </div>
       </div>
       <div className="add-todo-form">
         <input
@@ -89,7 +95,10 @@ export default function TodoList() {
           onChange={(e) => setTodoItem(e.target.value)}
           placeholder="Add a new todo..."
         />
-        <button className="add-btn" onClick={addTodo}>
+        <button
+          className={`add-btn ${todoItem.trim() ? "active_add-btn" : ""}`}
+          onClick={addTodo}
+        >
           Add Todo
         </button>
       </div>
