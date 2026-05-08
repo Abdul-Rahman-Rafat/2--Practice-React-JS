@@ -1,5 +1,6 @@
 .todo-item {
   display: flex;
+  /* flex-wrap: wrap; */
   align-items: center;
   /* justify-content: space-evenly; */
   padding: 30px;
@@ -12,6 +13,21 @@
   gap: 5px; /* بدل space-evenly */
   transition: all 0.3s ease-in-out; /* لإضافة تأثير عند التغيير */
 }
+.title-details {
+  display: flex;
+
+  flex: 1; /* ياخد باقي المساحة */
+
+  flex-direction: column;
+  gap: 5px;
+}
+
+.TodoTitle,
+.TodoDetails {
+  overflow-wrap: break-word;
+  word-break: break-word;
+}
+
 .TodoTitle.completedTask {
   /* background-color: #4caf50; */
   color: white;

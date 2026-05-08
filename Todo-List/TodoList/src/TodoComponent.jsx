@@ -1,9 +1,14 @@
 import "./TodoComponent.css";
 import { useContext } from "react";
 import { TodoListContext } from "../contexts/TodoListContext";
-import { useState } from "react";
-export default function TodoComponent({ todo }) {
+import { ToastContext } from "../contexts/ToastContext";
+export default function TodoComponent({
+  todo,
+  showDeleteDialog,
+  showEditDialog,
+}) {
   const { todos, setTodos } = useContext(TodoListContext);
+  const { ShowHideToast } = useContext(ToastContext);
 
   function onCompleted(id) {
     const updatedTodos = todos.map((todo) => {
@@ -14,34 +19,8 @@ export default function TodoComponent({ todo }) {
     });
     setTodos(updatedTodos);
     localStorage.setItem("todos", JSON.stringify(updatedTodos));
+    ShowHideToast("Todo status updated");
   }
-  function onEdit(id) {
-    // console.log("edit", id);
-    const updatedTodo = todos.find((todo) => todo.id === id);
-    const newText = prompt("Edit todo:", updatedTodo.text);
-    if (newText !== null) {
-      const updatedTodos = todos.map((todo) => {
-        if (todo.id === id) {
-          return { ...todo, text: newText };
-        }
-        return todo;
-      });
-
-      if (newText.trim() === "") {
-        console.log("Updated todo text cannot be empty.");
-        return;
-      } else {
-        setTodos(updatedTodos);
-        localStorage.setItem("todos", JSON.stringify(updatedTodos));
-      }
-    }
-  }
-  function onDelete(id) {
-    const updatedTodos = todos.filter((todo) => todo.id !== id);
-    setTodos(updatedTodos);
-    localStorage.setItem("todos", JSON.stringify(updatedTodos));
-  }
-
   return (
     <div className="todo-item">
       <div className="actions">
@@ -51,15 +30,18 @@ export default function TodoComponent({ todo }) {
         >
           ✓
         </button>
-        <button onClick={() => onEdit(todo.id)}> ✏️</button>
+        <button onClick={() => showEditDialog(todo.id)}> ✏️</button>
 
-        <button onClick={() => onDelete(todo.id)}>❌</button>
+        <button onClick={() => showDeleteDialog(todo.id)}>❌</button>
       </div>
-      <span
-        className={`TodoTitle ${todo.completed === true ? "completedTask" : ""}`}
-      >
-        {todo.text}
-      </span>
+      <div className="title-details">
+        <span
+          className={`TodoTitle ${todo.completed === true ? "completedTask" : ""}`}
+        >
+          {todo.text}
+        </span>
+        <p className="TodoDetails">{todo.details}</p>
+      </div>
     </div>
   );
 }
