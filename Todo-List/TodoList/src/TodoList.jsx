@@ -1,13 +1,17 @@
-import { useState, useContext, useEffect, useMemo } from "react";
+import { useState, useContext, useEffect, useMemo, useReducer } from "react";
 import { TodoListContext } from "../contexts/TodoListContext";
 import { ToastContext } from "../contexts/ToastContext";
+import TodosReducer from "../Reducers/TodosReducer";
 
 import TodoComponent from "./TodoComponent";
 import "./TodoList.css";
 // TodoList function displays and controls the todo list page.
 export default function TodoList() {
   // todos and setTodos variables come from context so every todo component can share the same list.
-  const { todos, setTodos } = useContext(TodoListContext);
+  const { todos2, setTodos } = useContext(TodoListContext);
+  // state and dispatch variables come from useReducer to manage the todo list state with the TodosReducer function.
+  const [todos, dispatch] = useReducer(TodosReducer, []);
+
   // const { showToast } = useContext(ToastContext);
   // todoItem state stores the text typed in the add-todo input.
   const [todoItem, setTodoItem] = useState("");
@@ -27,8 +31,8 @@ export default function TodoList() {
 
   // useEffect function loads saved todos from localStorage when the component mounts.
   useEffect(() => {
-    setTodos(JSON.parse(localStorage.getItem("todos")) || []);
-  }, [setTodos]); // This effect runs once to load the saved todos from localStorage.
+    dispatch({ type: "LOAD_TODOS" });
+  }, []); // This effect runs once to load the saved todos from localStorage.
   // //It will run after the component renders and the 'todos' state has been updated.
 
   // if we make the dependency array empty [] the effect will run only once when the component mounts and it will not run again when the 'todos' state changes.
@@ -39,22 +43,23 @@ export default function TodoList() {
   //addTodo function
   // addTodo function creates a new todo and saves the updated list.
   function addTodo() {
-    // newId variable calculates the id for the next todo item.
-    const newId = todos.length > 0 ? todos[todos.length - 1].id + 1 : 1;
-    if (todoItem.trim() === "") {
-      return;
-    }
-    // newTodo variable stores the todo object that will be added.
-    const newTodo = {
-      id: newId,
-      text: todoItem,
-      details: "",
-      completed: false,
-    };
-    // updatedTodos variable stores the list after adding the new todo.
-    const updatedTodos = [...todos, newTodo];
-    setTodos(updatedTodos);
-    localStorage.setItem("todos", JSON.stringify(updatedTodos));
+    // // newId variable calculates the id for the next todo item.
+    // const newId = todos.length > 0 ? todos[todos.length - 1].id + 1 : 1;
+    // if (todoItem.trim() === "") {
+    //   return;
+    // }
+    // // newTodo variable stores the todo object that will be added.
+    // const newTodo = {
+    //   id: newId,
+    //   text: todoItem,
+    //   details: "",
+    //   completed: false,
+    // };
+    // // updatedTodos variable stores the list after adding the new todo.
+    // const updatedTodos = [...todos, newTodo];
+    // setTodos(updatedTodos);
+    // localStorage.setItem("todos", JSON.stringify(updatedTodos));
+    dispatch({ type: "ADD_TODO", payload: { titleItem: todoItem } });
     ShowHideToast("Todo added successfully");
     setTodoItem("");
   }
