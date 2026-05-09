@@ -77,11 +77,13 @@ export default function TodoList() {
   }
   // ConfirmDelete function removes the selected todo after confirmation.
   function ConfirmDelete() {
+    dispatch({ type: "DELETE_TODO", payload: { id: todoToDelete } });
+
     if (todoToDelete !== null) {
       // updatedTodos variable stores the list after removing the selected todo.
-      const updatedTodos = todos.filter((todo) => todo.id !== todoToDelete);
-      setTodos(updatedTodos);
-      localStorage.setItem("todos", JSON.stringify(updatedTodos));
+      // const updatedTodos = todos.filter((todo) => todo.id !== todoToDelete);
+      // setTodos(updatedTodos);
+      // localStorage.setItem("todos", JSON.stringify(updatedTodos));
       ShowHideToast("Todo deleted successfully");
       setDeleteDialogOpen(false);
       setTodoToDelete(null);
@@ -104,19 +106,28 @@ export default function TodoList() {
   }
   // ConfirmEdit function saves the edited todo values.
   function ConfirmEdit() {
+    dispatch({
+      type: "EDIT_TODO",
+      payload: {
+        id: todoToEdit.id,
+        newText: todoToEdit.text,
+        newDetails: todoToEdit.details,
+      },
+    });
+
     if (todoToEdit) {
       if (todoToEdit.text.trim() === "") {
         // ShowHideToast("Todo title cannot be empty");
         return;
       } else {
-        // updatedTodos variable stores the list after replacing the edited todo.
-        const updatedTodos = todos.map((todo) =>
-          todo.id === todoToEdit.id
-            ? { ...todo, text: todoToEdit.text, details: todoToEdit.details }
-            : todo,
-        );
-        setTodos(updatedTodos);
-        localStorage.setItem("todos", JSON.stringify(updatedTodos));
+        // // updatedTodos variable stores the list after replacing the edited todo.
+        // const updatedTodos = todos.map((todo) =>
+        //   todo.id === todoToEdit.id
+        //     ? { ...todo, text: todoToEdit.text, details: todoToEdit.details }
+        //     : todo,
+        // );
+        // setTodos(updatedTodos);
+        // localStorage.setItem("todos", JSON.stringify(updatedTodos));
         ShowHideToast("Todo updated successfully");
         setEditDialogOpen(false);
         setTodoToEdit(null);

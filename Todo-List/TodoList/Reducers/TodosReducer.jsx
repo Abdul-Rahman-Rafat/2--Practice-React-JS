@@ -1,6 +1,11 @@
 // export default function TodosReducer(currentTodos, { type, payload }) {
 export default function TodosReducer(currentTodos, action) {
   switch (action.type) {
+    case "LOAD_TODOS": {
+      const savedTodos = JSON.parse(localStorage.getItem("todos")) || [];
+      return savedTodos;
+    }
+
     case "ADD_TODO": {
       // newId variable calculates the id for the next todo item.
       const newId =
@@ -20,10 +25,27 @@ export default function TodosReducer(currentTodos, action) {
       localStorage.setItem("todos", JSON.stringify(updatedTodos));
       return updatedTodos;
     }
-    case "LOAD_TODOS": {
-      const savedTodos = JSON.parse(localStorage.getItem("todos")) || [];
-      return savedTodos;
+    case "DELETE_TODO": {
+      const updatedTodos = currentTodos.filter(
+        (todo) => todo.id !== action.payload.id,
+      );
+      localStorage.setItem("todos", JSON.stringify(updatedTodos));
+      return updatedTodos;
     }
+    case "EDIT_TODO": {
+      const updatedTodos = currentTodos.map((todo) =>
+        todo.id === action.payload.id
+          ? {
+              ...todo,
+              text: action.payload.newText,
+              details: action.payload.newDetails,
+            }
+          : todo,
+      );
+      localStorage.setItem("todos", JSON.stringify(updatedTodos));
+      return updatedTodos;
+    }
+
     default:
       return console.error("unknown action type");
   }
