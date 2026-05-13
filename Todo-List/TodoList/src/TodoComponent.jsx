@@ -1,6 +1,8 @@
 import "./TodoComponent.css";
 import { useContext } from "react";
+
 import { TodoListContext } from "../contexts/TodoListContext";
+
 import { ToastContext } from "../contexts/ToastContext";
 // TodoComponent function displays one todo item with complete, edit, and delete actions.
 export default function TodoComponent({
@@ -8,21 +10,13 @@ export default function TodoComponent({
   showDeleteDialog,
   showEditDialog,
 }) {
-  // todos and setTodos variables come from context to update the shared todo list.
-  const { todos, setTodos } = useContext(TodoListContext);
+  const { todos, dispatch } = useContext(TodoListContext);
+
   // ShowHideToast variable receives the shared toast function from ToastContext.
   const { ShowHideToast } = useContext(ToastContext);
   // onCompleted function toggles the completed status of the selected todo.
   function onCompleted(id) {
-    // updatedTodos variable stores the list after changing one todo completion value.
-    const updatedTodos = todos.map((todo) => {
-      if (todo.id === id) {
-        return { ...todo, completed: !todo.completed };
-      }
-      return todo;
-    });
-    setTodos(updatedTodos);
-    localStorage.setItem("todos", JSON.stringify(updatedTodos));
+    dispatch({ type: "Compeleted", payload: { id } });
     ShowHideToast("Todo status updated");
   }
   return (

@@ -45,6 +45,15 @@ export default function TodosReducer(currentTodos, action) {
       localStorage.setItem("todos", JSON.stringify(updatedTodos));
       return updatedTodos;
     }
+    case "Compeleted": {
+      const updatedTodos = currentTodos.map((todo) =>
+        todo.id === action.payload.id
+          ? { ...todo, completed: !todo.completed }
+          : todo,
+      );
+      localStorage.setItem("todos", JSON.stringify(updatedTodos));
+      return updatedTodos;
+    }
 
     default:
       return console.error("unknown action type");

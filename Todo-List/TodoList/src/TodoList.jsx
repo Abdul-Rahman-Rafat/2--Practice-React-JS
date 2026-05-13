@@ -1,16 +1,16 @@
 import { useState, useContext, useEffect, useMemo, useReducer } from "react";
+
 import { TodoListContext } from "../contexts/TodoListContext";
+
 import { ToastContext } from "../contexts/ToastContext";
-import TodosReducer from "../Reducers/TodosReducer";
+// import TodosReducer from "../Reducers/TodosReducer";
 
 import TodoComponent from "./TodoComponent";
 import "./TodoList.css";
 // TodoList function displays and controls the todo list page.
 export default function TodoList() {
-  // todos and setTodos variables come from context so every todo component can share the same list.
-  const { todos2, setTodos } = useContext(TodoListContext);
-  // state and dispatch variables come from useReducer to manage the todo list state with the TodosReducer function.
-  const [todos, dispatch] = useReducer(TodosReducer, []);
+  // todos and dispatch variables come from context to update the shared todo list.
+  const { todos, dispatch } = useContext(TodoListContext);
 
   // const { showToast } = useContext(ToastContext);
   // todoItem state stores the text typed in the add-todo input.
@@ -43,22 +43,6 @@ export default function TodoList() {
   //addTodo function
   // addTodo function creates a new todo and saves the updated list.
   function addTodo() {
-    // // newId variable calculates the id for the next todo item.
-    // const newId = todos.length > 0 ? todos[todos.length - 1].id + 1 : 1;
-    // if (todoItem.trim() === "") {
-    //   return;
-    // }
-    // // newTodo variable stores the todo object that will be added.
-    // const newTodo = {
-    //   id: newId,
-    //   text: todoItem,
-    //   details: "",
-    //   completed: false,
-    // };
-    // // updatedTodos variable stores the list after adding the new todo.
-    // const updatedTodos = [...todos, newTodo];
-    // setTodos(updatedTodos);
-    // localStorage.setItem("todos", JSON.stringify(updatedTodos));
     dispatch({ type: "ADD_TODO", payload: { titleItem: todoItem } });
     ShowHideToast("Todo added successfully");
     setTodoItem("");
@@ -80,10 +64,6 @@ export default function TodoList() {
     dispatch({ type: "DELETE_TODO", payload: { id: todoToDelete } });
 
     if (todoToDelete !== null) {
-      // updatedTodos variable stores the list after removing the selected todo.
-      // const updatedTodos = todos.filter((todo) => todo.id !== todoToDelete);
-      // setTodos(updatedTodos);
-      // localStorage.setItem("todos", JSON.stringify(updatedTodos));
       ShowHideToast("Todo deleted successfully");
       setDeleteDialogOpen(false);
       setTodoToDelete(null);
@@ -120,14 +100,6 @@ export default function TodoList() {
         // ShowHideToast("Todo title cannot be empty");
         return;
       } else {
-        // // updatedTodos variable stores the list after replacing the edited todo.
-        // const updatedTodos = todos.map((todo) =>
-        //   todo.id === todoToEdit.id
-        //     ? { ...todo, text: todoToEdit.text, details: todoToEdit.details }
-        //     : todo,
-        // );
-        // setTodos(updatedTodos);
-        // localStorage.setItem("todos", JSON.stringify(updatedTodos));
         ShowHideToast("Todo updated successfully");
         setEditDialogOpen(false);
         setTodoToEdit(null);
