@@ -1,10 +1,10 @@
 "use client";
-
 import * as React from "react";
 import { useState } from "react";
 import "./App.css";
-import LoginComponent from "./LoginComponent";
+// import LoginComponent from "./LoginComponent";
 import WeatherComponent from "./WeatherComponent";
+
 function App() {
   return (
     <>
