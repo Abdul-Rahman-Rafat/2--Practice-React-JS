@@ -2,19 +2,19 @@ import { useState } from "react";
 
 //redux
 import { useSelector, useDispatch } from "react-redux";
-import { sum } from "./features/Calcs/calcSlice";
+import { sum, sub, divide, mult } from "./features/Calcs/calcSlice";
 
 export default function Calc() {
   //redux
   const calcResult = useSelector((state) => state.calc.result);
   const dispatch = useDispatch();
 
-  console.log(calcResult);
+  // console.log(calcResult);
 
   const [nums, setNums] = useState({
     Fnum: 0,
     Snum: 0,
-    Result: 0,
+    // Result: 0,
   });
 
   return (
@@ -47,17 +47,23 @@ export default function Calc() {
       </button>
 
       <button
-        onClick={() => setNums({ ...nums, Result: nums.Fnum - nums.Snum })}
+        // onClick={() => setNums({ ...nums, Result: nums.Fnum - nums.Snum })}
+        onClick={() => {
+          console.log("dispatch sub reducer");
+          return dispatch(sub({ fnum: nums.Fnum, snum: nums.Snum }));
+        }}
       >
         Subtract
       </button>
       <button
-        onClick={() => setNums({ ...nums, Result: nums.Fnum * nums.Snum })}
+        // onClick={() => setNums({ ...nums, Result: nums.Fnum * nums.Snum })}
+        onClick={() => dispatch(mult({ fnum: nums.Fnum, snum: nums.Snum }))}
       >
         Multiply
       </button>
       <button
-        onClick={() => setNums({ ...nums, Result: nums.Fnum / nums.Snum })}
+        // onClick={() => setNums({ ...nums, Result: nums.Fnum / nums.Snum })}
+        onClick={() => dispatch(divide({ fnum: nums.Fnum, snum: nums.Snum }))}
       >
         Divide
       </button>
