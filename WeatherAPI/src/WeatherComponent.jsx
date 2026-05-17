@@ -9,7 +9,18 @@ import { useState, useEffect } from "react";
 // the Translation hook
 import { useTranslation } from "react-i18next";
 
+//redux
+import { useSelector, useDispatch } from "react-redux";
+import { changeState } from "../features/weather/weatherSlice";
+
 export default function WeatherComponent() {
+  const dispatch = useDispatch();
+  const stateResult = useSelector((state) => {
+    console.log("the state is : ", state);
+    return 0;
+  });
+  // dispatch(changeState());
+  // console.log("the state is : ", stateResult);
   const [currentLanguage, setcurrentLanguage] = useState("en");
 
   const { t, i18n } = useTranslation();
@@ -117,7 +128,10 @@ export default function WeatherComponent() {
       <div className="w-full max-w-sm flex justify-start mt-2">
         <Button
           variant="outline"
-          onClick={() => changeLanguage(currentLanguage)}
+          onClick={() => {
+            changeLanguage(currentLanguage);
+            dispatch(changeState());
+          }}
         >
           {currentLanguage}
         </Button>
