@@ -9,6 +9,7 @@ import PostDetails from "./PostDetails";
 import NotFound from "./NotFound";
 import PostsLayout from "./PostsLayout";
 import TailwindReadyComponents from "./TailwindReadyComponents";
+import PracComponent from "./PracComponent";
 
 // postsData variable stores the sample posts that will be shared through context.
 let postsData = [
@@ -35,6 +36,7 @@ function App() {
     // PostsContext.Provider element makes postsData available to child components.
     <PostsContext.Provider value={postsData}>
       <>
+        <PracComponent />
         {/* nav element contains the main page navigation links. */}
         <nav>
           {/* ul element groups the navigation items in one list. */}
