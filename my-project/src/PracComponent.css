@@ -1,0 +1,38 @@
+.scrollMap {
+  position: fixed;
+  left: 50px;
+  top: 50%;
+  transform: translateY(-50%);
+
+  position: fixed;
+}
+
+.columns {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.columns span {
+  width: 2px;
+  height: 50px;
+  background: #007bff;
+}
+
+.circle {
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  border: 2px #007bff solid;
+
+  position: absolute;
+
+  left: 1px;
+  transform: translate(-50%, -50%);
+
+  transition: top 0.2s;
+}
+
+.section {
+  height: 100vh;
+}
